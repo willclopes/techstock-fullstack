@@ -361,42 +361,9 @@ Abaixo está a árvore organizada com as pastas e arquivos do TechStock.
 
 ---
 
-## 6. 🔄 Como o TechStock funciona
+## 6. 🛣️ Rotas do frontend e API
 
-```mermaid
-flowchart LR
-    A[Usuário no navegador] --> B[React e Vite]
-    B -->|Axios / HTTP| C[API Node.js e Fastify]
-    C --> D[Controller]
-    D --> E[Service]
-    E --> F[]
-    F --> G[(MySQL)]
-    G --> F
-    F --> E
-    E --> D
-    D --> C
-    C -->|JSON| B
-```
-
-**Exemplo de consulta:** o usuário entra no Dashboard, o React envia uma requisição à API, o backend consulta o banco e devolve dados em JSON para preencher o Catálogo.
-
-### Paginação: LIMIT e OFFSET
-
-- **`LIMIT`**: quantos registros mostrar.
-- **`OFFSET`**: quantos registros pular.
-- **Fórmula**: `offset = (pagina - 1) * limite`.
-
-Para a segunda página com 10 equipamentos por página:
-
-```sql
-SELECT * FROM equipamentos ORDER BY id LIMIT 10 OFFSET 10;
-```
-
----
-
-## 7. 🛣️ Rotas do frontend e API
-
-### 7.1. Rotas do frontend
+### 6.1. Rotas do frontend
 
 | Endereço | Página | Observação |
 |---|---|---|
