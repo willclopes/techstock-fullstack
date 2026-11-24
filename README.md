@@ -269,7 +269,10 @@ Abra o endereço exibido pelo Vite — geralmente:
 
 ```text
 http://localhost:5173
+```
 
+
+---
 ## 5. ESTRUTURA DE PASTAS E ARQUIVOS
 
 Abaixo está a árvore organizada com as pastas e arquivos do TechStock. 
