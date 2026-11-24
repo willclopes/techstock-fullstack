@@ -36,7 +36,6 @@ A empresa fictícia **TechSolutions** precisava de uma maneira mais organizada d
 | 🧭 **Primeira Versão** | Página para demonstrar a evolução do projeto. | Prevista na navegação. |
 | 🚫 **NotFound (404)** | Tratamento visual de endereços inexistentes. | Página própria, sem Header e Footer. |
 
-> **Observação:** esta documentação descreve a estrutura e os comandos fornecidos para o projeto. A disponibilidade de cada operação depende do código efetivamente implementado e do backend em execução. Não considere as páginas marcadas *em desenvolvimento* como concluídas.
 
 ### 🧰 Tecnologias utilizadas
 
