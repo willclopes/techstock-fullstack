@@ -1,8 +1,52 @@
-# DOCUMENTAÇÃO — SITUAÇÃO DE APRENDIZAGEM I — TECHSTOCK
+# 🖥️ TECHSTOCK
 
-**TechStock** é um sistema de controle de inventário de equipamentos desenvolvido como atividade da **Situação de Aprendizagem I — SENAI**.
+### Documentação — Situação de Aprendizagem I
 
-**Tecnologias:** React, Vite, Styled Components, Node.js, Fastify e MySQL.
+**Sistema de Controle de Inventário de Equipamentos | TechSolutions | SENAI**
+
+*Uma aplicação web para organizar, cadastrar e acompanhar equipamentos de tecnologia.*
+
+![React](https://img.shields.io/badge/React-Frontend-149ECA?style=flat-square&logo=react&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![Fastify](https://img.shields.io/badge/Fastify-API-202020?style=flat-square&logo=fastify&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Banco_de_dados-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Opcional-2496ED?style=flat-square&logo=docker&logoColor=white)
+
+</div>
+
+---
+
+## 📌 Sobre o projeto
+
+O **TechStock** foi desenvolvido para a **Situação de Aprendizagem I** do curso de **Técnico em Desenvolvimento de Sistemas Web — SENAI**.
+
+A empresa fictícia **TechSolutions** precisava de uma maneira mais organizada de acompanhar notebooks, monitores, mouses, teclados, headsets e acessórios. Em vez de depender exclusivamente de planilhas, a proposta é reunir os registros em uma aplicação com interface amigável e banco de dados.
+
+**Objetivos de aprendizagem:** praticar o fluxo entre **React → API Node.js/Fastify → MySQL**, a organização do código em camadas, a navegação entre páginas e as operações de cadastro e consulta.
+
+### ✨ Funcionalidades e telas
+
+| Recurso | Descrição | Situação documentada |
+|---|---|---|
+| 📊 **Dashboard** | Visão geral do inventário, indicadores e área de cadastro. | Estrutura desenvolvida; integração depende da execução do backend. |
+| 🧾 **Catálogo de ativos** | Listagem de equipamentos, situação, categoria e paginação. | Parte do projeto; conferir integração atual. |
+| ➕ **Cadastro** | Formulário para inserir equipamentos. | Parte do fluxo principal do projeto. |
+| 📑 **Relatório** | Área reservada a análises e informações consolidadas. | **Em desenvolvimento.** |
+| 🔍 **Consultas** | Área de pesquisa e filtros. | **Em desenvolvimento.** |
+| 🧭 **Primeira Versão** | Página para demonstrar a evolução do projeto. | Prevista na navegação. |
+| 🚫 **NotFound (404)** | Tratamento visual de endereços inexistentes. | Página própria, sem Header e Footer. |
+
+> **Observação:** esta documentação descreve a estrutura e os comandos fornecidos para o projeto. A disponibilidade de cada operação depende do código efetivamente implementado e do backend em execução. Não considere as páginas marcadas *em desenvolvimento* como concluídas.
+
+### 🧰 Tecnologias utilizadas
+
+| Camada | Tecnologias / bibliotecas |
+|---|---|
+| **Frontend** | React, Vite, JavaScript, Styled Components, React Router, Axios |
+| **Recursos adicionais do frontend** | React Hook Form e SweetAlert2 (conforme instalação no projeto) |
+| **Backend** | Node.js, Fastify, dotenv, UUID (conforme instalação), driver de MySQL usado na conexão |
+| **Banco de dados** | MySQL |
+| **Ambiente** | VS Code; MySQL instalado localmente **ou** em container Docker independente |
 
 ---
 
@@ -26,6 +70,22 @@ CREATE TABLE IF NOT EXISTS equipamentos (
 );
 ```
 
+#### Dicionário de campos
+
+| Campo | Tipo | Finalidade |
+|---|---|---|
+| `id` | `INT AUTO_INCREMENT` | Identificador único, gerado pelo banco. |
+| `nome` | `VARCHAR(120)` | Nome do equipamento. |
+| `categoria` | `VARCHAR(60)` | Notebook, Monitor, Mouse, Teclado etc. |
+| `numero_serie` | `VARCHAR(100) UNIQUE` | Número de série; não pode ser repetido. |
+| `status` | `VARCHAR(50)` | Situação: disponível, emprestado ou manutenção. |
+| `data_aquisicao` | `VARCHAR(100)` | Data de aquisição armazenada como texto no esquema atual. |
+
+> **Escolha de modelagem:** `data_aquisicao` foi mantida como `VARCHAR(100)` para reproduzir a estrutura original do exercício. Em uma evolução futura, vale considerar o tipo `DATE`, ajustando também a API e os formulários. É recomendável padronizar os textos de `status` (por exemplo, `Disponivel` versus `Disponível`), pois diferenças de acentuação podem afetar os filtros.
+
+---
+
+
 ## 2. INSTALAÇÃO E PREPARAÇÃO DO MYSQL COM DOCKER
 
 > O nome do banco de dados é **`techstock_db`**, tanto na instalação local quanto no Docker. São instalações alternativas: cada uma mantém seus próprios dados.
@@ -43,6 +103,20 @@ docker start techstock
 ```
 
 > `techstock` no parâmetro `--name` é o **nome do container**; `techstock_db` em `MYSQL_DATABASE` é o **nome do banco**. A senha `123` é apenas um exemplo didático para ambiente local.
+
+
+**Significado das opções:**
+
+| Opção | Significado |
+|---|---|
+| `-d` | Executa em segundo plano. |
+| `--name techstock` | Nome do container. |
+| `MYSQL_ROOT_PASSWORD=...` | Senha do usuário administrador do MySQL. |
+| `MYSQL_DATABASE=techstock_db` | Cria a base `techstock` na inicialização de um volume novo. |
+| `-p 3307:3306` | Porta `3307` do computador → porta `3306` do container. |
+| `-v techstock_mysql_dados:/var/lib/mysql` | Guarda os arquivos do banco em volume persistente. |
+| `mysql:8` | Imagem do MySQL, família 8. |
+
 
 ### 2.2. Acessar o container e o banco
 
@@ -118,6 +192,8 @@ SELECT COUNT(*) AS total FROM equipamentos;
 
 ## 3. CRIAÇÃO E PREPARAÇÃO DO BACKEND
 
+O backend é responsável por receber requisições HTTP, executar a lógica da aplicação e consultar o MySQL.
+
 ### 3.1. Iniciar o projeto e instalar dependências
 
 No terminal, dentro da pasta `backend`:
@@ -142,12 +218,17 @@ No `backend/package.json`, configurar o tipo de módulo e o script de desenvolvi
 
 ### 3.2. Arquivos do backend
 
-- 📁`src/controller/equipamentos-controller.js`
-- 📁`src/services/equipamentos-services.js`
-- 📁`src/repositories/equipamentos-repository.js`
-- 📁`src/routes/equipamentos-routes.js`
-- 📁`src/database/connection.js`
-- 📁`src/app.js` e `src/server.js`
+| Pasta/arquivo | Papel |
+|---|---|
+| 📁``src/controller/equipamentos-controller.js` | Recebe a requisição e devolve a resposta HTTP. |
+| 📁``src/services/equipamentos-services.js` | Organiza regras e validações da operação. |
+| 📁``src/repositories/equipamentos-repository.js` | Executa consultas e comandos SQL. |
+| 📁``src/routes/equipamentos-routes.js` | Declara os endereços da API. |
+| 📁``src/database/connection.js` | Configura a conexão com o MySQL. |
+| 📁``src/app.js` | Monta e configura a aplicação Fastify, se assim estiver implementado. |
+| 📁``src/server.js` | Inicia o servidor HTTP. |
+
+O fluxo esperado é **rota → controller → service → repository → banco de dados**.
 
 ### 3.3. Rodar o backend
 
@@ -164,6 +245,12 @@ node src/server.js
 ```
 
 ## 4. FRONTEND
+
+O frontend é construído com React e utiliza o Vite para iniciar o ambiente de desenvolvimento.
+
+Se o projeto já possui um `package.json` configurado e compartilhado, normalmente basta executar **`npm install`**, sem reinstalar cada pacote separadamente.
+
+Caso contrário, siga as instalações abaixo:
 
 ### 4.1. Instalar dependências
 
@@ -183,109 +270,144 @@ npm install sweetalert2
 npm run dev
 ```
 
+Abra o endereço exibido pelo Vite — geralmente:
+
+```text
+http://localhost:5173
+
 ## 5. ESTRUTURA DE PASTAS E ARQUIVOS
+
+Abaixo está a árvore organizada com as pastas e arquivos do TechStock. 
 
 ```text
 📁 TechStock/
 │
+├── 📁 banco_sql/
+│   └── 01_techstock.sql           # Criação e exemplos para o banco
+│
 ├── 📁 frontend/
-│   │
 │   ├── 📁 public/
-│   │
 │   ├── 📁 src/
-│   │   │
 │   │   ├── 📁 components/
-│   │   │   │
 │   │   │   ├── 📁 Header/
 │   │   │   │   ├── index.jsx
 │   │   │   │   └── styled.jsx
-│   │   │   │
 │   │   │   ├── 📁 Footer/
 │   │   │   │   ├── index.jsx
 │   │   │   │   └── styled.jsx
-│   │   │   │
 │   │   │   ├── 📁 Logo/
 │   │   │   │   ├── index.jsx
 │   │   │   │   └── styled.jsx
-│   │   │   │
 │   │   │   ├── 📁 Banner/
 │   │   │   │   ├── index.jsx
 │   │   │   │   └── styled.jsx
-│   │   │   │
 │   │   │   ├── 📁 Cards/
 │   │   │   │   ├── index.jsx
 │   │   │   │   └── styled.jsx
-│   │   │   │
 │   │   │   ├── 📁 Catalogo/
-│   │   │   │   ├── index.jsx   ← Tabela e paginação
+│   │   │   │   ├── index.jsx     # Tabela e paginação
 │   │   │   │   └── styled.jsx
-│   │   │   │
-│   │   │   └── 📁 Layout/         
-│   │   │       └── index.jsx   ← arquivo para "montar" os componentes da "rota" 
+│   │   │   └── 📁 Layout/
+│   │   │       └── index.jsx     # Header + Outlet + Footer
 │   │   │
 │   │   ├── 📁 pages/
-│   │   │   │
 │   │   │   ├── 📁 PrimeiraVersao/
 │   │   │   │   ├── index.jsx
 │   │   │   │   └── styled.jsx
-│   │   │   │
 │   │   │   ├── 📁 Dashboard/
 │   │   │   │   ├── index.jsx
 │   │   │   │   └── styled.jsx
-│   │   │   │
 │   │   │   ├── 📁 Relatorio/
 │   │   │   │   ├── index.jsx
 │   │   │   │   └── styled.jsx
-│   │   │   │
 │   │   │   ├── 📁 Consultas/
 │   │   │   │   ├── index.jsx
 │   │   │   │   └── styled.jsx
-│   │   │   │
 │   │   │   └── 📁 NotFound/
 │   │   │       ├── index.jsx
 │   │   │       └── styled.jsx
 │   │   │
-│   │   ├── router.jsx
-│   │   │
 │   │   ├── 📁 data/
-│   │   │   └── equipamentos.js   ← arquivo para teste do frontend
-│   │   │
+│   │   │   └── equipamentos.js  # Dados de teste do frontend
 │   │   ├── 📁 styles/
-│   │   │   └── palette-azul.css  ← decoração visual de todo projeto
-│   │   │
-│   │   ├── App.jsx               ← chama o RouterProvider router={router}
+│   │   │   └── palette-azul.css # Paleta e gradientes
+│   │   ├── router.jsx           # Definição das rotas (ou routes/router.jsx)
+│   │   ├── App.jsx              # RouterProvider
 │   │   ├── App.css
 │   │   ├── index.css
-│   │   └── main.jsx              ← importação do "palette-azul.css"
+│   │   └── main.jsx             # Inicialização do React
 │   │
 │   ├── index.html
 │   └── package.json
 │
-└── 📁backend/
-│   │
+├── 📁 backend/
 │   ├── 📁 src/
-│   │   │
-│   │   ├── 📁controller/
+│   │   ├── 📁 controller/
 │   │   │   └── equipamentos-controller.js
-│   │   │
-│   │   ├── 📁services/
+│   │   ├── 📁 services/
 │   │   │   └── equipamentos-services.js
-│   │   │
-│   │   ├── 📁repositories/
+│   │   ├── 📁 repositories/
 │   │   │   └── equipamentos-repository.js
-│   │   │
-│   │   ├── 📁routes/
+│   │   ├── 📁 routes/
 │   │   │   └── equipamentos-routes.js
-│   │   │
-│   │   └── 📁database/
+│   │   ├── 📁 database/
 │   │   │   └── connection.js
-│   │   │
 │   │   ├── server.js
-|   │   ├── app.js    
-│   │   ├── package.json
-│   │   └── .env
+│   │   └── app.js
+│   │
+│   ├── package.json
+│   └── .env                    # Configuração local (não versionar)
+│
+└── README.md
 ```
 
+---
+
+## 6. 🔄 Como o TechStock funciona
+
+```mermaid
+flowchart LR
+    A[Usuário no navegador] --> B[React e Vite]
+    B -->|Axios / HTTP| C[API Node.js e Fastify]
+    C --> D[Controller]
+    D --> E[Service]
+    E --> F[Repository]
+    F --> G[(MySQL)]
+    G --> F
+    F --> E
+    E --> D
+    D --> C
+    C -->|JSON| B
+```
+
+**Exemplo de consulta:** o usuário entra no Dashboard, o React envia uma requisição à API, o backend consulta o banco e devolve dados em JSON para preencher o Catálogo.
+
+### Paginação: LIMIT e OFFSET
+
+- **`LIMIT`**: quantos registros mostrar.
+- **`OFFSET`**: quantos registros pular.
+- **Fórmula**: `offset = (pagina - 1) * limite`.
+
+Para a segunda página com 10 equipamentos por página:
+
+```sql
+SELECT * FROM equipamentos ORDER BY id LIMIT 10 OFFSET 10;
+```
+
+---
+
+## 7. 🛣️ Rotas do frontend e API
+
+### 7.1. Rotas do frontend
+
+| Endereço | Página | Observação |
+|---|---|---|
+| `/` | Redireciona para `/dashboard` | Página inicial. |
+| `/primeiraversao` | PrimeiraVersao | Apresentação da primeira versão; precisa estar registrada no router. |
+| `/dashboard` | Dashboard | Conteúdo principal. |
+| `/relatorio` | Relatorio | Em desenvolvimento. |
+| `/consultas` | Consultas | Em desenvolvimento. |
+| Qualquer caminho inválido | NotFound | Página 404 fora do Layout. |
 
 
 ---
