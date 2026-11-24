@@ -369,7 +369,7 @@ flowchart LR
     B -->|Axios / HTTP| C[API Node.js e Fastify]
     C --> D[Controller]
     D --> E[Service]
-    E --> F[Repository]
+    E --> F[]
     F --> G[(MySQL)]
     G --> F
     F --> E
