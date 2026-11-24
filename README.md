@@ -220,13 +220,10 @@ No `backend/package.json`, configurar o tipo de módulo e o script de desenvolvi
 |---|---|
 | 📁``src/controller/equipamentos-controller.js` | Recebe a requisição e devolve a resposta HTTP. |
 | 📁``src/services/equipamentos-services.js` | Organiza regras e validações da operação. |
-| 📁``src/repositories/equipamentos-repository.js` | Executa consultas e comandos SQL. |
 | 📁``src/routes/equipamentos-routes.js` | Declara os endereços da API. |
 | 📁``src/database/connection.js` | Configura a conexão com o MySQL. |
 | 📁``src/app.js` | Monta e configura a aplicação Fastify, se assim estiver implementado. |
 | 📁``src/server.js` | Inicia o servidor HTTP. |
-
-O fluxo esperado é **rota → controller → service → repository → banco de dados**.
 
 ### 3.3. Rodar o backend
 
