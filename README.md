@@ -80,8 +80,7 @@ CREATE TABLE IF NOT EXISTS equipamentos (
 | `status` | `VARCHAR(50)` | Situação: disponível, emprestado ou manutenção. |
 | `data_aquisicao` | `VARCHAR(100)` | Data de aquisição armazenada como texto no esquema atual. |
 
-> **Escolha de modelagem:** `data_aquisicao` foi mantida como `VARCHAR(100)` para reproduzir a estrutura original do exercício. Em uma evolução futura, vale considerar o tipo `DATE`, ajustando também a API e os formulários. É recomendável padronizar os textos de `status` (por exemplo, `Disponivel` versus `Disponível`), pois diferenças de acentuação podem afetar os filtros.
-
+> **Escolha de modelagem:** `data_aquisicao` foi mantida como `VARCHAR(100)`. Em uma evolução futura, vale considerar o tipo `DATE`.
 ---
 
 
