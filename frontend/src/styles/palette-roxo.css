@@ -1,0 +1,148 @@
+:root {
+  --background: #fff7fc;
+  --surface: #ffffff;
+  --text: #34233f;
+  --muted: #725f80;
+  --line: #e8d5eb;
+
+  --green: #7e32ba;
+  --green-dark: #592184;
+  --green-soft: #ead2fb;
+  --coral: #f25172;
+  --coral-dark: #a82c50;
+  --coral-soft: #ffd3df;
+  --yellow: #b76619;
+  --yellow-soft: #ffe2b8;
+  --blue: #6657cb;
+  --blue-soft: #dedbff;
+
+  --gradient-page-light: radial-gradient(ellipse at 2% 6%, #f4e9ff 0, transparent 35%), radial-gradient(ellipse at 93% 4%, #ffe8eb 0, transparent 34%), linear-gradient(180deg, #fffaff 0%, #fffbff 100%);
+  --gradient-page: radial-gradient(ellipse at 2% 6%, #e3bcff 0, transparent 35%), radial-gradient(ellipse at 93% 4%, #ffbecd 0, transparent 34%), linear-gradient(180deg, #fff1fb 0%, #fff7f8 100%);
+  --gradient-banner: linear-gradient(108deg, #ffdcc4 0%, #dab1fb 54%, #ffc3d4 100%);
+  --gradient-logo: linear-gradient(135deg, #6b24ad 0%, #ae3abf 54%, #f45e77 100%);
+  --gradient-button: linear-gradient(105deg, #8134bd 0%, #d8449c 50%, #f56765 100%);
+  --gradient-total: linear-gradient(135deg, #efd4ff, #ffebfa);
+  --gradient-available: linear-gradient(135deg, #dbb2fc, #f4e1ff);
+  --gradient-loaned: linear-gradient(135deg, #ffbfcd, #ffe4d7);
+  --gradient-maintenance: linear-gradient(135deg, #d1c9ff, #eee0ff);
+
+
+
+--dash-border-total: #9848db;
+--dash-border-disponiveis: #24b889;
+--dash-border-emprestados: #f18a53;
+--dash-border-manutencao: #b65bcb;
+
+
+
+/* Sucesso - Verde menta suave */
+--gradient-success: linear-gradient(
+  120deg,
+  #e1faef 0%,
+  #c1f1dd 55%,
+  #a5e6ce 100%
+);
+
+/* Atenção - Coral pêssego suave */
+--gradient-warning: linear-gradient(
+  120deg,
+  #fff0e9 0%,
+  #ffdbd0 55%,
+  #ffc9bb 100%
+);
+
+
+  --shadow: 0 14px 45px rgba(99, 40, 135, 0.12);
+  --shadow-hover: 0 17px 38px rgba(99, 40, 135, 0.19);
+
+
+
+/* CORES EXCLUSIVAS DO DASHBOARD */
+
+/* Fundo dos quatro Cards */
+--dash-card-total: linear-gradient(
+  135deg,
+  #e9d5ff 0%,
+  #c99af5 50%,
+  #a978e9 100%
+);
+
+/* Disponíveis — Verde esmeralda tropical */
+--dash-card-disponiveis: linear-gradient(
+  135deg,
+  #d4f9e6 0%,
+  #8be6be 50%,
+  #46cba0 100%
+);
+
+/* Emprestados — Coral e pêssego */
+--dash-card-emprestados: linear-gradient(
+  135deg,
+  #ffe5d8 0%,
+  #ffc19f 50%,
+  #fa987d 100%
+);
+
+/* Em manutenção — Orquídea rosada */
+--dash-card-manutencao: linear-gradient(
+  135deg,
+  #f9ddf5 0%,
+  #e9ade2 50%,
+  #d17bcb 100%
+);
+
+/* Cor de destaque dos campos */
+--dash-focus: #a75ce5;
+
+
+/* ==========================================
+   STATUS DOS EQUIPAMENTOS - CATÁLOGO
+   ========================================== */
+
+/* Disponível - Verde esmeralda */
+--dash-status-disponivel-bg: linear-gradient(
+  135deg,
+  #d4f9e6 0%,
+  #a1ebcb 55%,
+  #77ddb6 100%
+);
+--dash-status-disponivel-text: #176b50;
+
+
+/* Emprestado - Coral tropical */
+--dash-status-emprestado-bg: linear-gradient(
+  135deg,
+  #ffe5d8 0%,
+  #ffd0b5 55%,
+  #ffb69d 100%
+);
+--dash-status-emprestado-text: #9b452b;
+
+
+/* Em manutenção - Orquídea rosada */
+--dash-status-manutencao-bg: linear-gradient(
+  135deg,
+  #f9ddf5 0%,
+  #edbee8 55%,
+  #e2a1dc 100%
+);
+--dash-status-manutencao-text: #783477;
+
+
+/* Fundo suave para tabelas e ações */
+--dash-table-bg: linear-gradient(
+  120deg,
+  #f8f3ff 0%,
+  #f5f0fc 50%,
+  #fff5f8 100%
+);
+
+
+
+
+/* Botão Editar */
+--dash-action-bg: #f1e5ff;
+--dash-action-text: #7934a8;
+
+}
+
